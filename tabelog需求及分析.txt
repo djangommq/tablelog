@@ -1,0 +1,105 @@
+tabelog网址https://tabelog.com/
+
+We are currently serviceable/expanding to following area (prefectures): Tokyo(東京都), Kanagawa(神奈川県), Osaka(大阪府), Kyoto(京都府), Hyogo(兵庫県)
+
+Would it be possible to narrow down area and increase data points within these area?
+Please see below for lat/lng coordinate for following area.
+                    Tokyo/Yokohama	        Osaka	                Hyogo	                Kyoto
+Top Left	    35.8094, 139.55597	34.78222, 135.3701	    34.81605, 135.07827	    35.08732, 135.68939
+Bottom Right	35.40919, 139.8999	34.57895, 135.61248	    34.65548, 135.485	    34.8679, 135.86517
+Would these be sufficient?
+
+
+Sorry for keep spamming you again. Do you have an update on this?
+We are planning on distributing DMs (postal mails, not email) to restaurants, and we would like a list of restaurants at latest by the end of this month.
+Do you think this is feasible? Thank you!
+
+My name is Risa and I am from Uber Eats Japan team. Please let us know when Tabelog data is ready, as we have been planing projects which require these data sets. Please let me know if additional information is needed. 
+
+
+Hi Jiaxianfu,
+Thank you for the file. Yes please let us know if there are any technical difficulties, then we can consider alternative websites as options as well. 
+I expect the dataset from each city to be at least twice bigger knowing how many restaurants we have... but if its the structure of website that is prohibiting data collection, please let us know.
+Thank you very much!
+Best,Risa
+
+
+2018.05.11
+Hello Bijie (is it your correct way to spell your first name?),Thank you very much for data set!. We really appreciate your prompt support on this.My name is Risa from Uber Eats Japan team, and I work with restaurant acquisition team on planning and analytics. I'm very excited about being able to see more details on Tabelog data.I'm reaching out to see if it is possible for us to make some requests on these data set Labeling each Tabelog page
+
+新需求
+Is it possible to request to add some kind of ID to label each Tabelog page? For example, if there is "Yunfutech Uber Eats Restaurant", I want to be able to track each restaurant every time we receive these data set.
+How our team uses these data set is to distribute direct mails or plan sales acquisition. We would like to distinguish ones that one "untouched" from ones that we have already reached out.
+采集中的重复，用坐标爬取需要去重，id号码抓取就不存在重复了
+There are some duplicate in dataset as well as inconsistency with numbers, so I want to be able to track each restaurant when we receive a new data set every month. 
+
+基于地区采集数据可行？
+Selecting Data based on "addressRegion" instead of Latitude and Longitude info。I believe this time we have received data from all over Japan. We provided Lat&Lng to select region, but instead, could you filter and collect data based on "addressRegion"? (like 東京、神奈川、大阪、Etc.)
+By accurately selecting region, we can remove data points that we do not need and increase the amount of data points in where we need (i.e. Tokyo) which hopefully helps both our business purpose and your team's operation.
+If these are not feasible request, please let me know. However, these restaurants data is very important to our day-to-day business operations so I want to explore every way that we can work with these data set. 
+Please let me know if there are any concerns or questions - happy to help. 
+
+
+通过ID抓取信息：
+构造url类似sql注入攻击
+https://tabelog.com/tokyo/B8304/B830401/13211121
+主域名/city/AXXXX/AXXXXXX/id
+这样根据id采集的信息比较多，里面有不存在的餐厅以及close的，后期客户如果需求就进一步处理
+
+目前抓取的城市有东京，大阪，神户（隶属兵库县），横滨（隶属神奈川），京都
+其中神户，横滨可以分别从冰库和神奈川筛选出
+
+
+2018.06.20
+其他供应商的数据表头：
+Store Name	TEL	Postal Code	Address	Prefecture	City / Ward Name	Address	Category	Budget (night)	Budget (day)	RatingCount	Rating	Transpotation	Hours	Holiday	# of Seats	ParkingLot	Service	Homepage	SNS	Open Date	ID
+脚本中的数据表头
+id	name	servesCuisine	image	addressCountry	postalCode	addressRegion	addressLocality	streetAddress	lat	lng	telephone	priceRange	ratingCount	ratingValue	Reservationavailability	transportation	businesshours	Fixedholiday	Budget	methodofpayment	Numberofseats	PrivateRoom	reserved	SmokingcessationOrsmoking	ParkingLot	SpaceOrEquipment	mobilephone	Allyoucandrinkcourse	course	drink	cuisine	Usescene	Location	service	homepage	Officialaccount	Openday
+
+
+采集餐厅的一些基本信息，见爬虫文件
+# 城市id范围五月
+'''
+东京              13000001,13221959
+大阪osaka         27000001,27102999
+神户Kobe兵库       28000001,28051935
+横滨Yokohama      14000001,14071648
+京都Kyoto         26000001,26030906
+'''
+
+
+大阪餐厅分析前150，餐厅状态分以下五种，最后要的餐饮是那些正常营业的，shop_status字段标记了餐厅状态，其中为空的就是正常营业的
+
+不刊登的id： 27000009 27000017 27000044 27000065 27000070 27000073 27000091 27000099 27000100
+停止营业id： 27000014 27000019 27000021 27000023 27000024 27000030 27000033 27000038 27000039 27000041 
+             27000042 27000045 27000048 27000049 27000050 27000054 27000056 27000057 27000059 27000062 
+             27000064 27000075 27000076 27000077 27000078 27000079 27000081 27000083 27000084 27000088 
+             27000089 27000092 27000093 27000096 27000097 
+迁址的的id： 27000025 27000027 27000034 27000085 27000087 
+不存在的id： 27000040 27000051 27000055 27000074 27000090 
+
+不刊登的id： 27000111 27000122 27000124 27000132 27000146 27000150
+停止营业id： 27000101 27000103 27000107 27000108 27000114 27000117 27000119 27000120 27000128 27000133
+             27000135 27000148 27000149 
+迁址的的id： 27000102 
+不存在的id： 27000106 27000127 27000140 
+
+ 
+
+Tokyo(東京都), Kanagawa(神奈川県), Osaka(大阪府), Kyoto(京都府), Hyogo(兵庫県)
+# 城市id范围六月
+'''
+东京 Tokyo          13000001,13223273
+大阪 Osaka          27000001,27105562
+兵库 hyogo          28000001,28052175
+神奈川 Kanagawa     14000001,14072039
+京都 Kyoto          26000001, 26030906
+2018-06-25邮件新加的
+爱之-aichi          23000001,23067905       共48,845店舗    
+福冈-fukuoka        40000001,40049040       共35,109店舗
+chiba               12000001,12044580       共31,599
+Saitama             11000001,11047653       共34,853 
+'''
+
+改一下15行的log命名
+改一下244行的输出文件的命名.
